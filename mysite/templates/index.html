@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+  <h1>{% trans "Autoservice" %}</h1>
+  <p>{% trans "Welcome to Autoservice!" %}</p>
+  <p>{% trans "Autoservice statistics:" %}</p>
+  <ul>
+    <li><strong>{% trans "Services:" %}</strong> {{ paslaugu_kiekis }}</li>
+    <li><strong>{% trans "Orders done:" %}</strong> {{ atliktu_uzsakymu_kiekis }}</li>
+    <li><strong>{% trans "Vehicles:" %}</strong> {{ automobiliu_kiekis }}</li>
+    <p>{% blocktrans %}Your visits in this site: {{ num_visits }}.{% endblocktrans %}</p>
+  </ul>
+{% endblock %}
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Statu</html>

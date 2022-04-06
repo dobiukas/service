@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Užsakymai</h1>
+  {% if order_list %}
+  <ul>
+    {% for order in order_list %}
+      <li>
+        <a class="{% if order.is_due_date %}text-danger{% endif %}" href="{% url 'order-detail' order.pk %}">{{ order.car }} ({{ order.due_date }})</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Nėra.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+    <div class="container car">
+        <h1><strong>Car: </strong>{{ order.car }}</h1>
+        <h1><strong>Due date: </strong>{{ order.due_date }}</h1>
+    </div>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Services:</h4>
+    {% for orderline in order.lines.all %}
+      <hr>
+      <p class="text-muted"><strong> Service: {{ orderline.service }} ({{ orderline.service.price }}) </strong> - {{orderline.qty}}, SUM: {{orderline.suma}}</p>
+    {% endfor %}
+  </div>
+    <hr>
+    <p>
+        TOTAL: {{ order.total }}
+    </p>
+
+{% if object.user == user %}
+<div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user-order-update' object.id %}">Redaguoti</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'user-order-delete' object.id %}">Ištrinti</a>
+    <br/>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user-orderline-new' object.id %}">Pridėti taisymą</a>
+</div>
+{% endif %}
+
+
+
+
+
+
+</br>
+  <h4>Comments:</h4>
+  {% if order.comments %}
+    {% for comment in order.comments.all %}
+      <hr>
+      <strong>{{ comment.user }}</strong>, <em>{{ comment.date_created}}</em>
+      <p>{{ comment.comment }}</p>
+    {% endfor %}
+  {% else %}
+    <p>Nėra komentarų</p>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Your comment:</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.comment }}</br>
+      <input type="submit" value="Save">
+    </form>
+  </div>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+ {% load static %}
+    <div class="container car">
+        {% if car.photo %}
+          <img src="{{ car.photo.url }}" class="card-img-top" alt="...">
+        {% else %}
+          <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+        {% endif %}
+        <h1><strong>Car Owner: </strong>{{ car.owner }}</h1>
+        <h1><strong>Car Model: </strong>{{ car.car_model }} ({{ car.year }})</h1>
+        <h4><strong>Licence plate: </strong>{{ car.licence_plate }}</h4>
+        <h4><strong>VIN code: </strong>{{ car.vin_code }}</h4>
+        <p>{{ car.description | safe }}</p>
+    </div>
+{% endblock %}</html>
